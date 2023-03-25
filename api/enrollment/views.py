@@ -89,7 +89,7 @@ class EnrollmentDetail(Resource):
 
         return enrollment
 
-    @enrollment_ns.expect(grade_model)
+    @enrollment_ns.expect(enrollment_model)
     @jwt_required()
     def put(self, enrollment_id):
         current_user_role = get_jwt()['role']
@@ -103,14 +103,16 @@ class EnrollmentDetail(Resource):
             return {'message': 'Enrollment not found'}, 404
 
         course_id = enrollment_ns.payload.get('course_id')
+        student_id = enrollment_ns.payload.get('student_id')
 
-        if course_id:
-            grade = Grade.query.get(course_id)
+        if not student_id:
+            return {'message': 'student_id Required'}, 404
 
-            if not grade:
-                return {'message': 'Invalid grade ID or course ID'}, 400
-
-            enrollment.grade = grade
+        if not course_id:
+            return {'message': 'Course_id required'},404
+        else:
+            enrollment.course_id = course_id
+            enrollment.student_id = student_id
 
         db.session.commit()
 
@@ -149,7 +151,6 @@ class CourseRegistration(Resource):
             return {'message': 'Unauthorized access'}, 401
 
         data = enrollment_ns.payload
-
         course_id = data.get('course_id')
 
         if not course_id:

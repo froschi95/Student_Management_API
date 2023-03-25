@@ -26,7 +26,7 @@ class Login(Resource):
     def post(self):
         data = request.json
 
-        # Find user by email
+        # Find user by username
         user = User.query.filter_by(username=data['username']).first()
 
         # Check if user exists and password is correct
@@ -72,7 +72,6 @@ class SignupResource(Resource):
 
         return {'message': 'User created successfully'}, 201
     
-
 
 @auth_ns.route('/refresh')
 class Refresh(Resource):

@@ -110,7 +110,7 @@ class UserDetail(Resource):
         if not user:
             return {'message': 'User not found'}, 404
 
-        return user
+        return user, 200
     
 
     @users_ns.expect(user_model)
@@ -129,7 +129,7 @@ class UserDetail(Resource):
         username = users_ns.payload.get('username')
         email = users_ns.payload.get('email')
         password = users_ns.payload.get('password')
-        role = users_ns.payload.get('role').get('role')
+        role = users_ns.payload.get('role')
 
         if username:
             user.username = username
@@ -148,7 +148,7 @@ class UserDetail(Resource):
 
         db.session.commit()
 
-        return {'message': 'User updated successfully'}
+        return {'message': 'User updated successfully'}, 200
 
     @jwt_required()
     def delete(self, user_id):
@@ -293,7 +293,7 @@ class StudentDetail(Resource):
             return {'message': 'Student not found'}, 404
 
 
-        return student
+        return student, 200
 
     @users_ns.expect(student_model)
     @jwt_required()
@@ -334,7 +334,7 @@ class StudentDetail(Resource):
 
         db.session.commit()
 
-        return {'message': 'Student updated successfully'}
+        return {'message': 'Student updated successfully'}, 200
 
     @jwt_required()
     def delete(self, student_id):

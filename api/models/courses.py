@@ -7,4 +7,5 @@ class Course(db.Model):
     name = db.Column(db.String(64), nullable=False)
     credit_hours = db.Column(db.Integer, nullable=False)
     course_code = db.Column(db.String(10))
+    teacher = db.Column(db.String(100))
     grades = db.relationship('Grade', backref='course', lazy=True)
