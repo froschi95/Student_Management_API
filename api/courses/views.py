@@ -246,6 +246,7 @@ class GradesByCourse(Resource):
 @course_ns.route('/grades/student/<int:student_id>')
 class GradesByStudent(Resource):
 
+    @course_ns.marshal_list_with(grade_model)
     @jwt_required()
     def get(self, student_id):
         current_user_role = get_jwt()['role']

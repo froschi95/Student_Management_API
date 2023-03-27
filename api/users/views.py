@@ -284,7 +284,9 @@ class StudentDetail(Resource):
     @users_ns.marshal_with(student_model)
     def get(self, student_id):
         current_user_role = get_jwt()['role']
-        if current_user_role != UserRole.ADMIN.value:
+        current_user_id = get_jwt()['sub']
+
+        if current_user_role != UserRole.ADMIN.value or current_user_id != student_id:
             return {'message': 'Unauthorized access'}, 401
 
         student = Student.query.get(student_id)
@@ -363,7 +365,7 @@ class StudentGrades(Resource):
         current_user_id = get_jwt()['sub']
         current_user_role = get_jwt()['role']
 
-        if current_user_role != UserRole.ADMIN.value and current_user_id != student_id:
+        if current_user_role != UserRole.ADMIN.value or current_user_id != student_id:
             return {'message': 'Unauthorized access'}, 401
 
         student = Student.query.get(student_id)
