@@ -41,6 +41,7 @@ Logs any user in and returns an access token.
 
 Parameters
 | Name | Type | Description |
+| ---------- | ------ | ---------------------------------- |
 | `username` | string | The user's username. |
 | `password` | string | The user's password. |
 
