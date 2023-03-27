@@ -47,6 +47,7 @@ Parameters
 
 Response
 | Name | Type | Description |
+| ---------- | ------ | ---------------------------------- |
 | `access_token`| string | An access token that can be used to authenticate future requests to protected endpoints.
 | `refresh_token` | string | A refresh token |
 
@@ -146,11 +147,12 @@ Response:
 {"message": "Student created Successfully"}, 201
 
 `DELETE /user/students`
-
 Allows an Admin user to delete all students
 
 `GET /users/students/student/<int:student_id>`
+
 `PUT /users/students/student/<int:student_id>`
+
 `DELETE /users/students/student/<int:student_id>`
 
 The endpoints above allow operations on a specific student by the admin.
@@ -172,6 +174,7 @@ Authorization is required, and both ADMIN and the authenticated STUDENT are allo
 ### COURSES
 
 `GET /courses/courses` - Retrieves a list of all courses
+
 `POST /courses/courses` - Creates a Course.
 
 Parameters
@@ -184,7 +187,9 @@ Parameters
 | `course_code` | string | The course code |
 
 `GET /courses//course/<int:course_id>`
+
 `PUT /courses//course/<int:course_id>`
+
 `DELETE /courses//course/<int:course_id>`
 
 Allow operations on a specific course.
@@ -200,8 +205,11 @@ Parameters
 #### GradesByCourse
 
 `GET  /courses/grades/<int:course_id>/`
+
 `POST  /courses/grades/<int:course_id>/`
+
 `PUT  /courses/grades/<int:course_id>/`
+
 `DELETE  /courses/grades/<int:course_id>/`
 
 Allows retrieving, adding, updating and deleting grades for individual courses.
@@ -218,6 +226,7 @@ Retrieves all grades belonging to a particular student. Only the authenticated s
 ### ENROLLMENT
 
 `GET /enrollment/enroll`
+
 Retrieves a list of all students and the courses they are enrolled in.
 Parameters
 | Name | Type | Description |
@@ -225,6 +234,7 @@ Parameters
 | Authorization | Header | JWT Token with 'ADMIN' role |
 
 `POST /enrollment/enroll`
+
 Enroll a student in a Course.
 Parameters
 | Name | Type | Description |
@@ -234,7 +244,9 @@ Parameters
 | `Course_id` | Integer | The Course ID |
 
 `GET /enrollment/enrollment/<int:enrollment_id>`
+
 `PUT /enrollment/enrollment/<int:enrollment_id>`
+
 `DELETE /enrollment/enrollment/<int:enrollment_id>`
 Allows an ADMIN user to retrieve and modify the details of a specific course enrollment.
 
