@@ -89,8 +89,11 @@ json, 201
 }
 
 `GET /users/user/<int:user_id>`,
+
 `POST /users/user/<int:user_id>`,
+
 `GET /users/user/<int:user_id>`,
+
 `DELETE /users/user/<int:user_id>`,
 
 These routes allow operations on a specific user by the admin.
