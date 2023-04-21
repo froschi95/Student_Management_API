@@ -31,10 +31,11 @@ class Student(db.Model):
         db.session.add(self)
         db.session.commit()
     
-    @classmethod
-    def bulk_save(cls, students_list):
+    # @classmethod
+    def bulk_save(students_list):
         """
         Save a list of objects to the database in bulk.
         """
-        db.session.bulk_save_objects([cls(**student) for student in students_list])
+        # db.session.bulk_save_objects([cls(**student) for student in students_list])
+        db.session.add_all(students_list)
         db.session.commit()

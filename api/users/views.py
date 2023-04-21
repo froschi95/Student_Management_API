@@ -210,7 +210,7 @@ class StudentList(Resource):
     
 
     @jwt_required()
-    # @users_ns.expect(upload_parser)
+    @users_ns.expect(upload_parser)
     def put(self):
         current_user_role = get_jwt()['role']
 
@@ -238,16 +238,16 @@ class StudentList(Resource):
         upload_file.save(file_path)
         
         try:
-            with open(upload_file, mode='r', encoding='utf-8') as f:
-                stream = TextIOWrapper(f, encoding='utf-8')
-                csv_reader = csv.DictReader(stream)
+            with open(file_path, mode='r', encoding='utf-8') as f:
+                # stream = TextIOWrapper(f, encoding='utf-8')
+                csv_reader = csv.DictReader(f)
                 
                 for row in csv_reader:
                     name = row.get('name')
                     enrollment_date = row.get('enrollment_date')
 
                     # Create a new user object with the provided credentials
-                    username = row.get('username')
+                    username = name.split(' ')[0] + '_' + name.split(' ')[1]
                     email = row.get('email')
                     password = row.get('password')
                     role = UserRole.STUDENT
@@ -263,6 +263,7 @@ class StudentList(Resource):
             return {'message': 'Students created successfully'}, 201
         
         except Exception as e:
+            print(e)
             return {'message': 'Error creating students: {}'.format(str(e))}, 400
 
     @jwt_required()
